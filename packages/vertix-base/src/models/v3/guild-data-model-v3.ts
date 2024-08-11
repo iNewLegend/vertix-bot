@@ -1,11 +1,13 @@
 import { PrismaBotClient } from "@vertix.gg/prisma/bot-client";
 import { isDebugEnabled } from "@vertix.gg/utils/src/environment";
 
+import { VERSION_UI_V3 } from "@vertix.gg/base/src/definitions/version";
+
 import { DataOwnerModelBase } from "@vertix.gg/base/src/bases/model-data-owner-base";
 
 const client = PrismaBotClient.$.getClient();
 
-export class GuildDataModel extends DataOwnerModelBase<
+export class GuildDataModelV3 extends DataOwnerModelBase<
     typeof client.guild,
     typeof client.guildData,
     PrismaBot.GuildData
@@ -16,8 +18,8 @@ export class GuildDataModel extends DataOwnerModelBase<
 
     public constructor() {
         super(
-            isDebugEnabled( "CACHE", GuildDataModel.getName() ),
-            isDebugEnabled( "MODEL", GuildDataModel.getName() )
+            isDebugEnabled( "CACHE", GuildDataModelV3.getName() ),
+            isDebugEnabled( "MODEL", GuildDataModelV3.getName() )
         );
     }
 
@@ -30,7 +32,7 @@ export class GuildDataModel extends DataOwnerModelBase<
     }
 
     protected getDataVersion() {
-        return "0.0.0" as const;
+        return VERSION_UI_V3;
     }
 
     protected getDataUniqueKeyName() {
@@ -38,13 +40,14 @@ export class GuildDataModel extends DataOwnerModelBase<
     }
 
     public async getUIVersion( guildId: string ) {
-        return this.getByOwner( { where: { guildId } }, {
+        return this.get( { where: { guildId } }, {
             key: "UIVersion"
         } );
     }
 
+    // TODO: Should be per master channel? or per guild?
     public async createUIVersion( guildId: string, uiVersion: string ) {
-        return this.createByOwner( { where: { guildId } }, {
+        return this.create( { where: { guildId } }, {
             key: "UIVersion"
         }, uiVersion );
     }

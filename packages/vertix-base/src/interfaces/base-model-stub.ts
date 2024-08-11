@@ -6,4 +6,6 @@ export interface TBaseModelStub {
     upsert( ... args: any[] ): any;
     upsert<T>( ... args: any[] ): Promise<T>;
     findUnique( ... args: any[] ): any,
+    findMany( ... args: any[] ): any,
+    findMany<T>( ... args: any[] ): Promise<T[]>;
 }

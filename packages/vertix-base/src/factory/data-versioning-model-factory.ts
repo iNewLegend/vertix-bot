@@ -8,11 +8,11 @@ import { ModelBaseCachedWithModel } from "@vertix.gg/base/src/bases/model-base";
 
 import { DataTypeFactory  } from "@vertix.gg/base/src/factory/data-type-factory";
 
-import type { TDataType , TDefaultResult } from "@vertix.gg/base/src/factory/data-type-factory";
+import type { TDefaultResult } from "@vertix.gg/base/src/factory/data-type-factory";
 
 import type { TBaseModelStub } from "@vertix.gg/base/src/interfaces/base-model-stub";
 
-export type TVersionType = `${ number }.${ number }.${ number }`;
+export type TVersionType = `${ number }.${ number }.${ number }.${ number }`;
 
 export interface TDataVersioningDefaultUniqueKeys {
     key: string;
